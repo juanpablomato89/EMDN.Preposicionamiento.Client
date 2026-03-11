@@ -1,9 +1,15 @@
-import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZoneChangeDetection } from '@angular/core';
+import { ApplicationConfig, importProvidersFrom, provideBrowserGlobalErrorListeners, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
-
 import { routes } from './app.routes';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { authInterceptor } from './interceptor/auth-interceptor';
+import { JwtModule } from '@auth0/angular-jwt';
+import { provideAnimations } from '@angular/platform-browser/animations';
+import { provideToastr } from 'ngx-toastr';
+
+export function tokenGetter() {
+  return localStorage.getItem('access_token'); // ✅ mismo nombre que en AuthService
+}
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -11,7 +17,19 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideHttpClient(
-      withInterceptors([authInterceptor])),
-
+      withInterceptors([authInterceptor])
+    ),
+    provideAnimations(),
+    provideToastr(),
+    importProvidersFrom(
+      JwtModule.forRoot({
+        config: {
+          tokenGetter: tokenGetter,
+          allowedDomains: ['http://localhost:4200'],
+          disallowedRoutes: ['http://localhost:4200/login']
+        }
+      })
+    ),
   ]
 };
+

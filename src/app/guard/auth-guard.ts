@@ -11,10 +11,8 @@ export const authGuard: CanActivateFn = (route, state) => {
 
   const token = localStorage.getItem('access_token');
 
-  // 1. Sin token -> Login
   if (!token) return redirectToLogin(state.url);
 
-  // 2. Token expirado -> Intentar renovar
   if (jwtHelper.isTokenExpired(token)) {
     return authService.refreshToken().pipe(
       switchMap(success => success
@@ -23,10 +21,8 @@ export const authGuard: CanActivateFn = (route, state) => {
       ))
   }
 
-  // 3. Token válido -> Acceso permitido
   return true;
 
-  // Función auxiliar
   function redirectToLogin(returnUrl: string): UrlTree {
     return router.createUrlTree(['/login'], { queryParams: { returnUrl } });
   }

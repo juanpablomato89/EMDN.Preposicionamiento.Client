@@ -1,14 +1,13 @@
-import { Inject, inject, Injectable, PLATFORM_ID } from '@angular/core';
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable, Subject, catchError, filter, map, of, switchMap, tap } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, catchError, map, of, tap } from 'rxjs';
 import { LoginRequest } from '../models/request/loginrequests';
 import { SignUpRequest } from '../models/request/signuprequest';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment.development';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { isPlatformBrowser } from '@angular/common';
 import { ResetPasswordRequest } from '../models/request/resetpasswordrequests';
-/*Google Login */
 
 @Injectable({
   providedIn: 'root',
@@ -42,7 +41,7 @@ export class AuthService {
             if (authHeader && refreshTokenHeader) {
               const accessToken = authHeader.replace('Bearer ', '');
               localStorage.setItem('access_token', accessToken);
-              localStorage.setItem('refreshToken_telescopy', refreshTokenHeader);
+              localStorage.setItem('refreshToken', refreshTokenHeader);
               this.loggedIn.next(true);
             }
           },
@@ -73,7 +72,7 @@ export class AuthService {
 
   private clearAuthData() {
     localStorage.removeItem('access_token');
-    localStorage.removeItem('refreshToken_telescopy');
+    localStorage.removeItem('refreshToken');
     this.loggedIn.next(false);
     this.router.navigate(['/login']);
   }
@@ -100,7 +99,6 @@ export class AuthService {
   }
 
   hasValidToken(): boolean {
-    // Verificar si estamos en el navegador
     if (isPlatformBrowser(this.platformId)) {
       try {
         const token = localStorage.getItem('access_token');
@@ -113,21 +111,20 @@ export class AuthService {
     return false;
   }
 
-  // Método para renovar token usando refresh token
   refreshToken(): Observable<boolean> {
-    const refreshToken = localStorage.getItem('refreshToken_telescopy');
+    const refreshToken = localStorage.getItem('refreshToken');
     return this.httpClient.post<any>(`${environment.apiUrl}/auth/refresh-token`, { refreshToken }).pipe(
       map(response => {
         if (response.accessToken) {
           localStorage.setItem('access_token', response.accessToken);
           this.loggedIn.next(true);
-          return true; // Éxito
+          return true;
         }
-        return false; // Falla
+        return false;
       }),
       catchError(() => {
         this.clearAuthData();
-        return of(false); // Siempre retorna booleano
+        return of(false);
       })
     );
   }

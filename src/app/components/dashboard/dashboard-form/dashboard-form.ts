@@ -6,16 +6,11 @@ import { AuthService } from '../../../services/authservice';
 import { ToastrService } from 'ngx-toastr';
 import { finalize } from 'rxjs';
 import { BasicUserResponse } from '../../../models/response/basicuserresponse';
-import { BestNiches } from '../best-niches/best-niches';
-import { ProductResearch } from "../product-research/product-research";
-import { FavoriteProduct } from '../favorite-product/favorite-product';
-import { Watchlist } from '../watchlist/watchlist';
-import { HelpCenter } from '../help-center/help-center'
 
 @Component({
   selector: 'app-dashboard-form',
   standalone: true,
-  imports: [CommonModule, Profile, Home, BestNiches, ProductResearch, FavoriteProduct, Watchlist, HelpCenter],
+  imports: [CommonModule, Profile, Home],
   templateUrl: './dashboard-form.html',
   styleUrl: './dashboard-form.scss',
 })
@@ -24,7 +19,7 @@ export class DashboardForm {
   activeItem = 'home';
   user: BasicUserResponse = {};
   title = '';
-  subtitle = 'Discover key insights on sales, trends, and market performance';
+  subtitle = '';
   isLoading = false;
   isLoadingUserValue = false;
 
@@ -44,43 +39,22 @@ export class DashboardForm {
 
     switch (item) {
       case 'home':
-        this.title = `Welcome Back, ${this.user.name}`;
+        this.title = `Bienvenido, ${this.user.name}`;
         this.subtitle =
-          'Discover key insights on sales, trends, and market performance';
-        break;
-      case 'best':
-        this.title = 'Best Niches';
-        this.subtitle =
-          'Uncover the most profitable niches and market opportunities.';
-        break;
-      case 'research':
-        this.title = 'Product Research';
-        this.subtitle = 'Find high-potential products to boost your sales.';
-        break;
-      case 'products':
-        this.title = 'Favorite Products';
-        this.subtitle = 'Manage and track your favorite products.';
-        break;
-      case 'favorites':
-        this.title = 'Favorite Products';
-        this.subtitle = 'Manage and track your favorite products.';
-        break;
-      case 'watchlist':
-        this.title = 'Watchlist';
-        this.subtitle = 'Manage and track your favorite products.';
+          'Descubra Información cable acerca del preposicionamiento';
         break;
       case 'settings':
-        this.title = 'Settings';
+        this.title = 'Configuración';
         this.subtitle =
-          'Customize Your Telescopy Experience. You are in Control';
+          'Configuración';
         break;
       case 'help':
-        this.title = 'Help Center';
-        this.subtitle = 'Explore Support. Discover Better Ways Forward.';
+        this.title = 'Centro de Ayudas';
+        this.subtitle = 'Explora el soporte. Descubre mejores maneras de avanzar.';
         break;
       case 'contact':
-        this.title = 'Contact us';
-        this.subtitle = 'Contact us';
+        this.title = 'Contactenos';
+        this.subtitle = 'Contactenos';
         break;
 
       default:
@@ -104,7 +78,7 @@ export class DashboardForm {
       .subscribe({
         next: (response) => {
           this.user = response.result;
-          this.title = `Welcome Back, ${this.user.name}`;
+          this.title = `Bienvenido, ${this.user.name}`;
 
       },
       error: (err) => {

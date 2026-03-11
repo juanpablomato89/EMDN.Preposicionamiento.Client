@@ -11,13 +11,12 @@ import { AuthService } from '../../../services/authservice';
 import { LoginRequest } from '../../../models/request/loginrequests';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { GoogleSigninButtonDirective } from '@abacritt/angularx-social-login';
-import { finalize, takeUntil } from 'rxjs';
-import { untilDestroyed } from '@ngneat/until-destroy';
+import { finalize } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+
 @Component({
   selector: 'app-form-login',
-  imports: [CommonModule, ReactiveFormsModule, GoogleSigninButtonDirective],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './form-login.html',
   styleUrl: './form-login.scss',
 })
