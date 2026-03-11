@@ -1,0 +1,108 @@
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 30px;
+  position: relative;
+  width: 100%;
+  background-size: cover; /* Cambiado de cover a auto */
+  background-position: center; /* Cambiado de center */
+  background-image: url(../../../../assets/img/background.png);
+  background-repeat: no-repeat; /* Aseguramos que se repita */
+  background-attachment: fixed; /* Opcional: para efecto parallax */
+  overflow: auto; /* Permite scroll si el contenido es largo */
+}
+
+.login-logo {
+  width: 470px;
+  height: 27.5px;
+  left: calc(50% - 470px / 2);
+  top: 135px;
+  background: url(../../../../assets/img/logo.png) no-repeat;
+  background-size: contain;
+  padding: 1.5rem;
+}
+
+.form-register {
+  width: 100%;
+  height: auto;
+  max-width: 642px; /* Máximo ancho para desktop */
+  padding: 30px 20px;
+  background: rgba(255, 255, 255, 0.16);
+  border: 1.5px solid rgba(255, 255, 255, 0.24);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(6px);
+  border-radius: 8px;
+  margin: 0 auto;
+}
+
+.text-content {
+  margin-bottom: 24px;
+}
+
+.color__text {
+  color: #f3f3f3;
+}
+
+.title__text {
+  font-family: Title Page/Font Family;
+  font-weight: Title Page/Font Weight;
+  font-style: Bold;
+  font-size: Title Page/Size Base;
+  line-height: 120%;
+  letter-spacing: -2%;
+  text-align: center;
+}
+
+.subtitle__text {
+  width: 214;
+  height: 22;
+  opacity: 1;
+  font-family: Body/Font Family;
+  font-weight: Body/Font Weight Regular;
+  font-style: Regular;
+  font-size: Body/Size Medium;
+  line-height: 140%;
+  letter-spacing: 0%;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.btn-submit {
+  background: #00c1ca;
+  border-radius: 8px;
+  color: white;
+}
+
+/* Responsive adjustments */
+@media (max-width: 767px) {
+  /* Corregido a 767px que es estándar Bootstrap */
+  .register-container {
+    background-size: auto; /* Mantenemos repetición */
+    background-attachment: scroll; /* Mejor comportamiento en móvil */
+    align-items: center; /* Alinea al inicio para contenido largo */
+    justify-content: center;
+    padding: 30px;
+  }
+
+  .form-register {
+    padding: 30px 20px;
+    height: auto; /* Altura automática */
+    min-height: auto;
+    width: 95%; /* Más ancho en móviles */
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 575px) {
+  .form-register {
+    padding: 25px 15px;
+    width: 95%;
+  }
+
+  .row > div {
+    margin-bottom: 12px;
+  }
+}

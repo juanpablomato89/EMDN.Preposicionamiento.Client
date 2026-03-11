@@ -1,0 +1,30 @@
+<div class="container-chart">
+  <div class="row m-0">
+    <div class="col-8" style="padding-left: 0px;">
+      <div class="chart-card">
+        <apx-chart
+          [series]="splineChartOptions.series"
+          [chart]="splineChartOptions.chart"
+          [xaxis]="splineChartOptions.xaxis"
+          [stroke]="splineChartOptions.stroke"
+          [title]="splineChartOptions.title"
+          [dataLabels]="splineChartOptions.dataLabels"
+          [markers]="splineChartOptions.markers"
+          [responsive]="splineChartOptions.responsive"
+        ></apx-chart>
+      </div>
+    </div>
+    <div class="col-4" style="padding-right: 0px;">
+      <div class="chart-card" style="height: 344px;">
+        <apx-chart
+        [series]="radialChartOptions.series"
+        [chart]="radialChartOptions.chart"
+        [labels]="radialChartOptions.labels"
+        [plotOptions]="radialChartOptions.plotOptions"
+        [dataLabels]="radialChartOptions.dataLabels"
+        [responsive]="radialChartOptions.responsive"
+      ></apx-chart>
+      </div>
+    </div>
+  </div>
+</div>

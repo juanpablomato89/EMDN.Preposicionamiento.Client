@@ -1,0 +1,65 @@
+.container-profile {
+  width: 322px;
+  height: 32px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+
+.profile__icons {
+  width: 120px;
+  height: 24px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+
+.profile__avatar {
+  width: 170px;
+  height: 32px;
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.icon {
+    cursor: pointer;
+}
+
+.avatar__icon {
+  width: 32px;
+  height: 32px;
+}
+
+.profile__text {
+  width: 126;
+  height: 24;
+  margin-left: 8px;
+}
+
+.profile__text span {
+  display: block;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 16px;
+  line-height: 150%;
+  letter-spacing: 0%;
+}
+
+@media screen and (max-width: 1154px) {
+  .container-profile {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: space-between;
+    height: 70px;
+    width: 100%;
+    padding-right: 16px;
+  }
+
+  .profile__avatar {
+    width: 170px;
+    height: 32px;
+    display: flex;
+    flex-flow: column wrap;
+  }
+}
