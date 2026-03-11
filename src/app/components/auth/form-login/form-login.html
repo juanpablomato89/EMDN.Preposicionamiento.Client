@@ -3,14 +3,14 @@
     <div class="login-logo justify-content-center mb-3 mb-md-0"></div>
     <div class="login-form justify-content-center">
       <div class="header">
-        <span class="header__title">Welcome</span>
-        <span class="header__subtitle">Please enter your details</span>
+        <span class="header__title">Bienvenido</span>
+        <span class="header__subtitle">Por favor ingresa tus datos</span>
       </div>
 
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <!-- Email Input (Bootstrap) -->
         <div class="mb-1 input-container">
-          <label for="email" class="form-label">Email</label>
+          <label for="email" class="form-label">Correo</label>
           <div class="input-group">
             <input
               type="email"
@@ -36,17 +36,17 @@
             class="invalid-feedback"
           >
             <div *ngIf="loginForm.get('email')?.errors?.['required']">
-              Email is required
+              El correo es obligatorio
             </div>
             <div *ngIf="loginForm.get('email')?.errors?.['email']">
-              Please enter a valid email
+              Por favor, introduzca un correo electrónico válido
             </div>
           </div>
         </div>
 
         <!-- Password Input (Bootstrap) -->
         <div class="mb-1 input-container">
-          <label for="password" class="form-label">Password</label>
+          <label for="password" class="form-label">Contraseña</label>
           <div class="input-group">
             <input
               [type]="hidePassword ? 'password' : 'text'"
@@ -100,19 +100,13 @@
               id="checkDefault"
             />
             <label class="form-check-label" for="checkDefault">
-              Remember password
+              Recordar Contraseña
             </label>
           </div>
 
           <div class="forgot-link">
-            <a href="/forgot-password">Forgot password?</a>
+            <a href="/forgot-password">Cambiar Contraseña?</a>
           </div>
-        </div>
-
-        <div class="divider">
-          <div class="divider-line"></div>
-          <div class="divider-text">Or log in with</div>
-          <div class="divider-line"></div>
         </div>
 
         <div class="social-login">
@@ -126,15 +120,15 @@
           [disabled]="isLoading || loginForm.invalid"
         >
           @if (isLoading) {
-          <span>Logging in...</span>
+          <span>iniciando...</span>
           } @else {
-          <span>Log In</span>
+          <span>Iniciar sesión</span>
           }
         </button>
 
         <!-- Register Link -->
         <div class="register-link">
-          <u>Don't have an account?</u> <a href="/register">Register here</a>
+          <u>No tengo una cuenta?</u> <a href="/register">Regístrate aquí </a>
         </div>
       </form>
     </div>

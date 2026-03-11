@@ -8,7 +8,7 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideToastr } from 'ngx-toastr';
 
 export function tokenGetter() {
-  return localStorage.getItem('access_token'); // ✅ mismo nombre que en AuthService
+  return localStorage.getItem('access_token');
 }
 
 export const appConfig: ApplicationConfig = {

@@ -44,12 +44,8 @@ export class FormRegister {
         name: ['', [Validators.required, Validators.minLength(2)]],
         lastName: ['', [Validators.required, Validators.minLength(2)]],
         email: ['', [Validators.required, Validators.email]],
-        country: ['', Validators.required],
-        marketplace: ['', Validators.required],
-        phone: ['', Validators.required],
         password: ['', [Validators.required, Validators.minLength(8)]],
         confirmPassword: ['', Validators.required],
-        rememberPassword: [false],
       },
       { validator: passwordMatchValidator }
     );
@@ -59,14 +55,10 @@ export class FormRegister {
     if (this.registerForm.valid) {
       this.isLoading = true;
 
-      // Obtener valores del formulario
       const credentials: SignUpRequest = {
         name: this.registerForm.value.name,
         lastName: this.registerForm.value.lastName,
         email: this.registerForm.value.email,
-        country: this.registerForm.value.country,
-        phoneNumber: this.registerForm.value.phone,
-        marketplace: this.registerForm.value.marketplace,
         password: this.registerForm.value.password,
         confirmationPassword: this.registerForm.value.confirmPassword,
       };
@@ -81,7 +73,7 @@ export class FormRegister {
         .subscribe(
           (res) => {
             this.registerForm.markAllAsTouched();
-            this.toastr.success('User Registered Successfully', 'Success');
+            this.toastr.success('Usuario registrado exitosamente', 'Éxito');
 
             this.router.navigate(['/login']);
           },

@@ -6,12 +6,12 @@
   padding: 30px;
   position: relative;
   width: 100%;
-  background-size: cover; /* Cambiado de cover a auto */
-  background-position: center; /* Cambiado de center */
+  background-size: cover;
+  background-position: center;
   background-image: url(../../../../assets/img/background.png);
-  background-repeat: no-repeat; /* Aseguramos que se repita */
-  background-attachment: fixed; /* Opcional: para efecto parallax */
-  overflow: auto; /* Permite scroll si el contenido es largo */
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  overflow: auto;
 }
 
 .login-logo {
@@ -19,7 +19,6 @@
   height: 27.5px;
   left: calc(50% - 470px / 2);
   top: 135px;
-  background: url(../../../../assets/img/logo.png) no-repeat;
   background-size: contain;
   padding: 1.5rem;
 }
@@ -27,7 +26,7 @@
 .form-register {
   width: 100%;
   height: auto;
-  max-width: 642px; /* Máximo ancho para desktop */
+  max-width: 642px;
   padding: 30px 20px;
   background: rgba(255, 255, 255, 0.16);
   border: 1.5px solid rgba(255, 255, 255, 0.24);
@@ -75,22 +74,20 @@
   color: white;
 }
 
-/* Responsive adjustments */
 @media (max-width: 767px) {
-  /* Corregido a 767px que es estándar Bootstrap */
   .register-container {
-    background-size: auto; /* Mantenemos repetición */
-    background-attachment: scroll; /* Mejor comportamiento en móvil */
-    align-items: center; /* Alinea al inicio para contenido largo */
+    background-size: auto;
+    background-attachment: scroll;
+    align-items: center;
     justify-content: center;
     padding: 30px;
   }
 
   .form-register {
     padding: 30px 20px;
-    height: auto; /* Altura automática */
+    height: auto;
     min-height: auto;
-    width: 95%; /* Más ancho en móviles */
+    width: 95%;
     margin-top: 20px;
     margin-bottom: 20px;
   }

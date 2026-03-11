@@ -24,7 +24,6 @@ export class FormLogin implements OnInit {
   loginForm: FormGroup;
   hidePassword = true;
   isLoading = false;
-  isLoadingGoogle = false;
 
   constructor(
     private fb: FormBuilder,
@@ -41,8 +40,6 @@ export class FormLogin implements OnInit {
     });
   }
   ngOnInit(): void {
-    this.loginGoogleSocial();
-    this.getErrorLoginGoogleSocial();
   }
 
   onSubmit() {
@@ -58,7 +55,7 @@ export class FormLogin implements OnInit {
       this.authService.login(credentials).subscribe({
         next: (response) => {
           this.isLoading = false;
-          this.toastr.success('Login successful!', 'Success');
+          this.toastr.success('Inicio de sesión exitoso!', 'Éxito');
 
           const returnUrl =
             this.activatedRoute.snapshot.queryParams['returnUrl'] ||
@@ -68,59 +65,13 @@ export class FormLogin implements OnInit {
         error: (err) => {
           this.isLoading = false;
           this.toastr.error(
-            err.error?.message || 'Invalid credentials',
+            err.error?.message || 'Credenciales no válidas',
             'Error'
           );
         },
       });
     } else {
-      this.toastr.info('Please complete all required fields correctly', 'Info');
+      this.toastr.info('Por favor, complete todos los campos obligatorios correctamente', 'Info');
     }
-  }
-
-  private loginGoogleSocial() {
-    this.isLoadingGoogle = true;
-    this.authService
-      .isgoogleLoggedIn()
-      .pipe(
-        finalize(() => (this.isLoadingGoogle = false)),
-        takeUntilDestroyed(this.destroyRef)
-      )
-      .subscribe({
-        next: (value) => {
-          this.toastr.success('Google Login Successful!', 'Success');
-
-          const returnUrl =
-            this.activatedRoute.snapshot.queryParams['returnUrl'] ||
-            '/dashboard';
-          this.router.navigateByUrl(returnUrl);
-        },
-        error: (err) => {
-          this.toastr.error(
-            err.error?.message || 'Invalid Google Credentials',
-            'Error'
-          );
-        },
-      });
-  }
-
-  private getErrorLoginGoogleSocial() {
-    this.authService
-      .getgoogleErrorObservable()
-      .pipe(
-        finalize(() => (this.isLoadingGoogle = false)),
-        takeUntilDestroyed(this.destroyRef)
-      )
-      .subscribe({
-        next: (value) => {
-          this.toastr.error('Google Login Error!', 'Error');
-        },
-        error: (err) => {
-          this.toastr.error(
-            err.error?.message || 'Invalid Google Credentials',
-            'Error'
-          );
-        },
-      });
   }
 }
