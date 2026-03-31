@@ -38,23 +38,23 @@ export class DashboardForm {
     this.activeItem = item;
 
     switch (item) {
-      case 'home':
+      case 'inicio':
         this.title = `Bienvenido, ${this.user.name}`;
         this.subtitle =
-          'Descubra Información cable acerca del preposicionamiento';
+          'Descubra Información acerca del preposicionamiento';
         break;
-      case 'settings':
+      case 'configuracion':
         this.title = 'Configuración';
         this.subtitle =
           'Configuración';
         break;
-      case 'help':
+      case 'ayuda':
         this.title = 'Centro de Ayudas';
         this.subtitle = 'Explora el soporte. Descubre mejores maneras de avanzar.';
         break;
-      case 'contact':
-        this.title = 'Contactenos';
-        this.subtitle = 'Contactenos';
+      case 'contactenos':
+        this.title = 'Contáctenos';
+        this.subtitle = 'Comuníquese con nosotros y le responderemos a la brevedad.';
         break;
 
       default:
