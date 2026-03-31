@@ -16,7 +16,7 @@ import { BasicUserResponse } from '../../../models/response/basicuserresponse';
 })
 export class DashboardForm {
   isCollapsed = false;
-  activeItem = 'home';
+  activeItem = 'inicio';
   user: BasicUserResponse = {};
   title = '';
   subtitle = '';
