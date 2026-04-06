@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MapaCubaOffline } from './mapa-cuba-offline/mapa-cuba-offline';
+import { MapLeaflet } from '../map/map';
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule, MapaCubaOffline],
+  imports: [CommonModule, MapLeaflet],
   standalone: true,
   templateUrl: './home.html',
   styleUrl: './home.scss'
