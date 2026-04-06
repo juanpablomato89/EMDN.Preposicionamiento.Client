@@ -34,27 +34,23 @@ export class MapLeaflet {
   onMapClick(event: any) {
     const lat = event.latlng.lat;
     const lng = event.latlng.lng;
-    const map = event.target; // Referencia al mapa
+    const map = event.target;
 
     // 1. Eliminar el marcador anterior si existe
     /*if (this.currentMarker) {
       this.currentMarker.remove();
     }*/
 
-    // 2. Crear un nuevo marcador en la posición del clic
     const newMarker = L.marker([lat, lng]).addTo(map);
     this.currentMarker = newMarker;
 
-    // 3. (Opcional) Mostrar un popup con las coordenadas mientras se carga la dirección
     newMarker
       .bindPopup(`<b>Cargando dirección...</b><br>(${lat.toFixed(6)}, ${lng.toFixed(6)})`)
       .openPopup();
 
-    // 4. Realizar geocodificación inversa para obtener la dirección
     this.nominatimService.reverseGeocode(lat, lng).subscribe({
       next: (data) => {
         const direccion = data.display_name || 'Dirección no encontrada';
-        // Actualizar el popup con la dirección obtenida
         newMarker
           .bindPopup(
             `
@@ -66,7 +62,6 @@ export class MapLeaflet {
           .openPopup();
       },
       error: (err) => {
-        console.error('Error al obtener la dirección:', err);
         newMarker
           .bindPopup(
             `
