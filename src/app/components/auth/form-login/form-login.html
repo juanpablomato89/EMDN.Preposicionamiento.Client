@@ -17,6 +17,8 @@
               class="form-control"
               id="email"
               formControlName="email"
+              placeholder="usuario@dcn.co.cu"
+              (blur)="onEmailBlur()"
               [ngClass]="{
                 'is-invalid':
                   loginForm.get('email')?.invalid &&

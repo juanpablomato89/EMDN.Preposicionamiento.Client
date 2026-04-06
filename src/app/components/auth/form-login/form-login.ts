@@ -74,4 +74,16 @@ export class FormLogin implements OnInit {
       this.toastr.info('Por favor, complete todos los campos obligatorios correctamente', 'Info');
     }
   }
+
+  onEmailBlur(): void {
+  const emailControl = this.loginForm.get('email');
+  let emailValue = emailControl?.value || '';
+
+  if (emailValue && !emailValue.includes('@')) {
+    const cleanUsername = emailValue.trim();
+    const fullEmail = `${cleanUsername}@dcn.co.cu`;
+    emailControl?.setValue(fullEmail);
+    emailControl?.markAsTouched();
+  }
+}
 }
