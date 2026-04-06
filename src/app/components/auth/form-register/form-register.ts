@@ -1,10 +1,5 @@
 import { Component } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  Validators,
-  ReactiveFormsModule,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../services/authservice';
 import { SignUpRequest } from '../../../models/request/signuprequest';
@@ -22,14 +17,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class FormRegister {
   registerForm: FormGroup;
-  countries = [
-    'Estados Unidos',
-    'México',
-    'España',
-    'Colombia',
-    'Argentina',
-    'Chile',
-  ];
+  countries = ['Estados Unidos', 'México', 'España', 'Colombia', 'Argentina', 'Chile'];
   marketplaces = [{ id: 0, marketPlace: 'EUA' }];
   isLoading = false;
 
@@ -37,7 +25,7 @@ export class FormRegister {
     private fb: FormBuilder,
     private authService: AuthService,
     private toastr: ToastrService,
-    private router: Router
+    private router: Router,
   ) {
     this.registerForm = this.fb.group(
       {
@@ -47,7 +35,7 @@ export class FormRegister {
         password: ['', [Validators.required, Validators.minLength(8)]],
         confirmPassword: ['', Validators.required],
       },
-      { validator: passwordMatchValidator }
+      { validator: passwordMatchValidator },
     );
   }
 
@@ -68,19 +56,20 @@ export class FormRegister {
         .pipe(
           finalize(() => {
             this.isLoading = false;
-          })
+          }),
         )
-        .subscribe(
-          (res) => {
+        .subscribe({
+          next: () => {
             this.registerForm.markAllAsTouched();
             this.toastr.success('Usuario registrado exitosamente', 'Éxito');
 
             this.router.navigate(['/login']);
           },
-          (err) => {
+          error: (err) => {
+            console.log(err);
             this.toastr.error(err.error.message, 'Error');
-          }
-        );
+          },
+        });
     }
   }
 }
