@@ -56,6 +56,7 @@ export class MapLeaflet {
 
     this.nominatimService.reverseGeocode(lat, lng).subscribe({
       next: (data) => {
+        console.log(data);
         const direccion = data.display_name || 'Dirección no encontrada';
         newMarker
           .bindPopup(
@@ -92,8 +93,6 @@ export class MapLeaflet {
     if (index !== -1) {
       marker.remove();
       this.markers.splice(index, 1);
-    } else {
-      console.warn('Marcador no encontrado en el array');
     }
   }
 }
