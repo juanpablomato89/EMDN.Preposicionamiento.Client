@@ -66,7 +66,6 @@ export class FormRegister {
             this.router.navigate(['/login']);
           },
           error: (err) => {
-            console.log(err);
             this.toastr.error(err.error.message, 'Error');
           },
         });

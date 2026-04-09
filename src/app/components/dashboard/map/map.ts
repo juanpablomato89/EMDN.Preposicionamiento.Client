@@ -23,7 +23,7 @@ export class MapLeaflet {
     center: L.latLng(21.5, -80.0),
   };
 
-   private currentMarker: L.Marker | null = null;
+  private markers: L.Marker[] = [];
 
   constructor(private nominatimService: NominatimService) {}
 
@@ -31,18 +31,24 @@ export class MapLeaflet {
     const bounds = L.latLngBounds([19.5, -85.0], [23.5, -74.0]);
     map.fitBounds(bounds);
   }
+
   onMapClick(event: any) {
     const lat = event.latlng.lat;
     const lng = event.latlng.lng;
     const map = event.target;
 
-    // 1. Eliminar el marcador anterior si existe
-    /*if (this.currentMarker) {
-      this.currentMarker.remove();
-    }*/
+    const customIcon = L.icon({
+      iconRetinaUrl: 'assets/marker-icon-2x.png',
+      iconUrl: 'assets/marker-icon.png',
+      shadowUrl: 'assets/marker-shadow.png',
+      iconSize: [25, 41],
+      iconAnchor: [12, 41],
+      popupAnchor: [1, -34],
+      shadowSize: [41, 41],
+    });
 
-    const newMarker = L.marker([lat, lng]).addTo(map);
-    this.currentMarker = newMarker;
+    const newMarker = L.marker([lat, lng], { icon: customIcon }).addTo(map);
+    this.markers.push(newMarker);
 
     newMarker
       .bindPopup(`<b>Cargando dirección...</b><br>(${lat.toFixed(6)}, ${lng.toFixed(6)})`)
@@ -54,23 +60,40 @@ export class MapLeaflet {
         newMarker
           .bindPopup(
             `
-          <b>📍 Ubicación</b><br>
-          ${direccion}<br>
-          <small>(${lat.toFixed(6)}, ${lng.toFixed(6)})</small>
-        `,
+            <b>📍 Ubicación</b><br>
+            ${direccion}<br>
+            <small>(${lat.toFixed(6)}, ${lng.toFixed(6)})</small>
+          `,
           )
           .openPopup();
       },
-      error: (err) => {
+      error: () => {
         newMarker
           .bindPopup(
             `
-          <b>⚠️ Error al obtener dirección</b><br>
-          Coordenadas: (${lat.toFixed(6)}, ${lng.toFixed(6)})
-        `,
+            <b>⚠️ Error al obtener dirección</b><br>
+            Coordenadas: (${lat.toFixed(6)}, ${lng.toFixed(6)})
+          `,
           )
           .openPopup();
       },
     });
+
+    newMarker.on('contextmenu', (markerEvent: L.LeafletMouseEvent) => {
+      L.DomEvent.stopPropagation(markerEvent.originalEvent);
+
+      const clickedMarker = markerEvent.target as L.Marker;
+      this.deleteMarker(clickedMarker);
+    });
+  }
+
+  private deleteMarker(marker: L.Marker): void {
+    const index = this.markers.indexOf(marker);
+    if (index !== -1) {
+      marker.remove();
+      this.markers.splice(index, 1);
+    } else {
+      console.warn('Marcador no encontrado en el array');
+    }
   }
 }
