@@ -43,6 +43,11 @@ export class DashboardForm {
         this.subtitle =
           'Descubra Información acerca del preposicionamiento';
         break;
+        case 'productos':
+        this.title = 'Productos';
+        this.subtitle =
+          'Datos técnicos, presentaciones y disponibilidad';
+        break;
       case 'configuracion':
         this.title = 'Configuración';
         this.subtitle =
