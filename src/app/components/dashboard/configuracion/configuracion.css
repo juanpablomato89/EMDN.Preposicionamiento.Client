@@ -1,0 +1,31 @@
+.configuracion-container {
+  padding: 0.5rem 0;
+}
+
+.security-tabs {
+  display: flex;
+  gap: 0.5rem;
+  border-bottom: 2px solid #e9ecef;
+  padding-bottom: 0;
+}
+
+.security-tab {
+  background: transparent;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  font-weight: 500;
+  color: #6c757d;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  transition: all 0.15s ease-in-out;
+}
+
+.security-tab:hover {
+  color: #00abb3;
+}
+
+.security-tab.active {
+  color: #00abb3;
+  border-bottom-color: #00abb3;
+}

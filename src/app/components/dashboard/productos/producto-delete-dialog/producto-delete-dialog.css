@@ -1,0 +1,9 @@
+.dialog-form {
+  padding: 1.25rem;
+}
+
+.dialog-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #dc3545;
+}

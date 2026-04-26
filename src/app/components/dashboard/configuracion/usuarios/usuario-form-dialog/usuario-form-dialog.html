@@ -1,0 +1,65 @@
+<div class="dialog-form">
+  <h2 class="dialog-title mb-3">
+    {{ isEdit ? 'Editar usuario' : 'Nuevo usuario' }}
+  </h2>
+
+  <form [formGroup]="form" (ngSubmit)="save()" class="d-flex flex-column gap-3">
+    <div>
+      <label class="form-label">Email *</label>
+      <input type="email" class="form-control" formControlName="email" />
+      @if (form.get('email')?.touched && form.get('email')?.invalid) {
+        <small class="text-danger">Email requerido y válido.</small>
+      }
+    </div>
+
+    <div class="row g-2">
+      <div class="col-md-6">
+        <label class="form-label">Nombre *</label>
+        <input type="text" class="form-control" formControlName="name" />
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Apellidos *</label>
+        <input type="text" class="form-control" formControlName="lastName" />
+      </div>
+    </div>
+
+    @if (!isEdit) {
+      <div>
+        <label class="form-label">Contraseña *</label>
+        <input type="password" class="form-control" formControlName="password" />
+        @if (form.get('password')?.touched && form.get('password')?.invalid) {
+          <small class="text-danger">Mínimo 6 caracteres.</small>
+        }
+      </div>
+    }
+
+    <div class="row g-2">
+      <div class="col-md-6">
+        <label class="form-label">Rol *</label>
+        <select class="form-select" formControlName="role">
+          @for (r of data.roles; track r.name) {
+            <option [ngValue]="r.name">{{ r.name }}</option>
+          }
+        </select>
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Organismo</label>
+        <select class="form-select" formControlName="organismoId">
+          <option [ngValue]="null">Sin organismo</option>
+          @for (o of data.organismos; track o.id) {
+            <option [ngValue]="o.id">{{ o.descripcion }}</option>
+          }
+        </select>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-end gap-2 mt-2">
+      <button type="button" class="btn btn-outline-secondary" (click)="cancel()" [disabled]="saving">
+        Cancelar
+      </button>
+      <button type="submit" class="btn btn-primary" [disabled]="saving">
+        {{ saving ? 'Guardando...' : (isEdit ? 'Actualizar' : 'Crear') }}
+      </button>
+    </div>
+  </form>
+</div>

@@ -6,6 +6,7 @@ import { authInterceptor } from './interceptor/auth-interceptor';
 import { JwtModule } from '@auth0/angular-jwt';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideToastr } from 'ngx-toastr';
+import { MatDialogModule } from '@angular/material/dialog';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -21,6 +22,7 @@ export const appConfig: ApplicationConfig = {
     ),
     provideAnimations(),
     provideToastr(),
+    importProvidersFrom(MatDialogModule),
     importProvidersFrom(
       JwtModule.forRoot({
         config: {

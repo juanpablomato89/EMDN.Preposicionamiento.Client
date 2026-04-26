@@ -143,4 +143,35 @@ export class AuthService {
     return this.httpClient.get<any>(
       `${environment.apiUrl}/auth/user-details`);
    }
+
+  getCurrentRole(): string | null {
+    if (!isPlatformBrowser(this.platformId)) return null;
+    const token = localStorage.getItem('access_token');
+    if (!token) return null;
+    try {
+      const decoded: any = this.jwtHelper.decodeToken(token);
+      return decoded?.role
+        ?? decoded?.['http://schemas.microsoft.com/ws/2008/06/identity/claims/role']
+        ?? null;
+    } catch {
+      return null;
+    }
+  }
+
+  isAdmin(): boolean {
+    return this.getCurrentRole() === 'Admin';
+  }
+
+  getCurrentOrganismoId(): number | null {
+    if (!isPlatformBrowser(this.platformId)) return null;
+    const token = localStorage.getItem('access_token');
+    if (!token) return null;
+    try {
+      const decoded: any = this.jwtHelper.decodeToken(token);
+      const v = decoded?.organismoId;
+      return v != null ? Number(v) : null;
+    } catch {
+      return null;
+    }
+  }
 }

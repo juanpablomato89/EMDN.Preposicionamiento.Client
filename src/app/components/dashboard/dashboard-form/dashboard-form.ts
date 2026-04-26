@@ -2,6 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Profile } from '../profile/profile';
 import { Home } from '../home/home';
+import { ProductosList } from '../productos/productos-list/productos-list';
+import { Configuracion } from '../configuracion/configuracion';
 import { AuthService } from '../../../services/authservice';
 import { ToastrService } from 'ngx-toastr';
 import { finalize } from 'rxjs';
@@ -10,7 +12,7 @@ import { BasicUserResponse } from '../../../models/response/basicuserresponse';
 @Component({
   selector: 'app-dashboard-form',
   standalone: true,
-  imports: [CommonModule, Profile, Home],
+  imports: [CommonModule, Profile, Home, ProductosList, Configuracion],
   templateUrl: './dashboard-form.html',
   styleUrl: './dashboard-form.scss',
 })

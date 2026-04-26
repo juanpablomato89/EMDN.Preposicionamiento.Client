@@ -1,0 +1,49 @@
+<div class="dialog-form">
+  <h2 class="dialog-title mb-3">
+    {{ isEdit ? 'Editar producto' : 'Nuevo producto' }}
+  </h2>
+
+  <form [formGroup]="form" (ngSubmit)="save()" class="d-flex flex-column gap-3">
+    <div>
+      <label class="form-label">Descripción *</label>
+      <input type="text" class="form-control" formControlName="descripcion" />
+      @if (form.get('descripcion')?.touched && form.get('descripcion')?.invalid) {
+        <small class="text-danger">La descripción es requerida (máx. 200).</small>
+      }
+    </div>
+
+    <div>
+      <label class="form-label">Unidad de medida</label>
+      <input type="text" class="form-control" formControlName="unidadMedida" placeholder="kg, l, u..." />
+    </div>
+
+    @if (data.isAdmin) {
+      <div>
+        <label class="form-label">Organismo {{ isEdit ? '' : '*' }}</label>
+        <select class="form-select" formControlName="organismoId">
+          <option [ngValue]="null">Seleccione...</option>
+          @for (o of data.organismos; track o.id) {
+            <option [ngValue]="o.id">{{ o.descripcion }}</option>
+          }
+        </select>
+        @if (form.get('organismoId')?.touched && form.get('organismoId')?.invalid) {
+          <small class="text-danger">Seleccione un organismo.</small>
+        }
+      </div>
+    }
+
+    <div>
+      <label class="form-label">Fecha de ingreso *</label>
+      <input type="date" class="form-control" formControlName="fechaIngreso" />
+    </div>
+
+    <div class="d-flex justify-content-end gap-2 mt-2">
+      <button type="button" class="btn btn-outline-secondary" (click)="cancel()" [disabled]="saving">
+        Cancelar
+      </button>
+      <button type="submit" class="btn btn-primary" [disabled]="saving">
+        {{ saving ? 'Guardando...' : (isEdit ? 'Actualizar' : 'Crear') }}
+      </button>
+    </div>
+  </form>
+</div>

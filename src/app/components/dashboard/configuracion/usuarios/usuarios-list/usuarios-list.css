@@ -1,0 +1,12 @@
+.usuarios-container {
+  padding: 0.5rem 0;
+}
+
+.usuarios-container .filters .form-label {
+  color: #6c757d;
+  font-weight: 500;
+}
+
+.usuarios-container .badge {
+  font-size: 0.75rem;
+}

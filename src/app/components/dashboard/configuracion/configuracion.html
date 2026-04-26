@@ -1,0 +1,24 @@
+<div class="configuracion-container">
+  @if (!isAdmin) {
+    <div class="alert alert-warning">
+      No tienes permisos para acceder a la configuración de seguridad.
+    </div>
+  } @else {
+    <div class="security-tabs mb-3">
+      <button
+        type="button"
+        class="security-tab"
+        [class.active]="active === 'usuarios'"
+        (click)="setSection('usuarios')"
+      >
+        Usuarios
+      </button>
+    </div>
+
+    <div class="security-content">
+      @if (active === 'usuarios') {
+        <app-usuarios-list></app-usuarios-list>
+      }
+    </div>
+  }
+</div>
