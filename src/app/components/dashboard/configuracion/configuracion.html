@@ -4,21 +4,33 @@
       No tienes permisos para acceder a la configuración de seguridad.
     </div>
   } @else {
-    <div class="security-tabs mb-3">
-      <button
-        type="button"
-        class="security-tab"
-        [class.active]="active === 'usuarios'"
-        (click)="setSection('usuarios')"
-      >
-        Usuarios
-      </button>
-    </div>
+    <div class="security-layout">
+      <aside class="security-sidemenu">
+        <div class="security-sidemenu-title">Seguridad</div>
+        <ul class="security-sidemenu-list">
+          @for (item of menu; track item.key) {
+            <li>
+              <button
+                type="button"
+                class="security-sidemenu-item"
+                [class.active]="active === item.key"
+                (click)="setSection(item.key)"
+              >
+                <span class="item-label">{{ item.label }}</span>
+                <span class="item-description">{{ item.description }}</span>
+              </button>
+            </li>
+          }
+        </ul>
+      </aside>
 
-    <div class="security-content">
-      @if (active === 'usuarios') {
-        <app-usuarios-list></app-usuarios-list>
-      }
+      <section class="security-content">
+        @switch (active) {
+          @case ('usuarios') { <app-usuarios-list></app-usuarios-list> }
+          @case ('roles') { <app-roles-list></app-roles-list> }
+          @case ('sesiones') { <app-sesiones-list></app-sesiones-list> }
+        }
+      </section>
     </div>
   }
 </div>

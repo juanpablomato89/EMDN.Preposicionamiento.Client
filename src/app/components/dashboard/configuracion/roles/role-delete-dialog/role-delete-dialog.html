@@ -1,0 +1,13 @@
+<div class="dialog-form">
+  <h2 class="dialog-title mb-3">Eliminar rol</h2>
+  <p class="mb-4">
+    ¿Está seguro que desea eliminar el rol
+    <strong>{{ data.role.name }}</strong>? Esta acción no se puede deshacer.
+  </p>
+  <div class="d-flex justify-content-end gap-2">
+    <button class="btn btn-outline-secondary" (click)="cancel()" [disabled]="deleting">Cancelar</button>
+    <button class="btn btn-danger" (click)="confirm()" [disabled]="deleting">
+      {{ deleting ? 'Eliminando...' : 'Eliminar' }}
+    </button>
+  </div>
+</div>
