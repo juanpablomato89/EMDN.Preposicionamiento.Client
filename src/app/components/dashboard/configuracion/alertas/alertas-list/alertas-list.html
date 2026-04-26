@@ -1,0 +1,77 @@
+<div class="alertas-container">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <div>
+      <h5 class="mb-0">Alertas de seguridad</h5>
+      <small class="text-muted">Reglas y notificaciones disparadas por eventos.</small>
+    </div>
+    <div class="btn-group">
+      <button class="btn btn-sm" [class.btn-primary]="view === 'rules'" [class.btn-outline-primary]="view !== 'rules'"
+              (click)="view = 'rules'">Reglas</button>
+      <button class="btn btn-sm" [class.btn-primary]="view === 'history'" [class.btn-outline-primary]="view !== 'history'"
+              (click)="view = 'history'">Historial</button>
+    </div>
+  </div>
+
+  @if (view === 'rules') {
+    <div class="d-flex justify-content-end mb-3">
+      <button class="btn btn-primary" (click)="openCreate()">+ Nueva regla</button>
+    </div>
+
+    <div class="card">
+      <div class="card-body p-0">
+        <div class="table-responsive">
+          <table class="table table-hover align-middle mb-0">
+            <thead class="table-light">
+              <tr>
+                <th>Nombre</th>
+                <th>Tipo de evento</th>
+                <th>Umbral / Ventana</th>
+                <th>Destinatarios</th>
+                <th>Estado</th>
+                <th class="text-end">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              @if (isLoading) {
+                <tr><td colspan="6" class="text-center py-4 text-muted">Cargando...</td></tr>
+              } @else if (rules.length === 0) {
+                <tr><td colspan="6" class="text-center py-4 text-muted">No hay reglas configuradas</td></tr>
+              } @else {
+                @for (r of rules; track r.id) {
+                  <tr>
+                    <td>
+                      <strong>{{ r.name }}</strong>
+                      @if (r.description) {
+                        <div><small class="text-muted">{{ r.description }}</small></div>
+                      }
+                    </td>
+                    <td><span class="badge bg-info text-dark">{{ r.eventTypeName }}</span></td>
+                    <td>
+                      @if (r.threshold) { {{ r.threshold }} en {{ r.windowMinutes || '?' }} min }
+                      @else { - }
+                    </td>
+                    <td><small>{{ r.notifyEmails.join(', ') || '-' }}</small></td>
+                    <td>
+                      @if (r.enabled) {
+                        <span class="badge bg-success">Activa</span>
+                      } @else {
+                        <span class="badge bg-secondary">Desactivada</span>
+                      }
+                    </td>
+                    <td class="text-end">
+                      <button class="btn btn-sm btn-outline-primary me-1" (click)="openEdit(r)">Editar</button>
+                      <button class="btn btn-sm btn-outline-secondary me-1" (click)="test(r)">Probar</button>
+                      <button class="btn btn-sm btn-outline-danger" (click)="delete(r)">Eliminar</button>
+                    </td>
+                  </tr>
+                }
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  } @else {
+    <app-notificaciones-list [rules]="rules"></app-notificaciones-list>
+  }
+</div>

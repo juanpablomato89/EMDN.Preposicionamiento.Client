@@ -1,0 +1,112 @@
+<div class="ldap-container">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <div>
+      <h5 class="mb-0">Configuración LDAP / Active Directory</h5>
+      <small class="text-muted">Integración para autenticación de dominio.</small>
+    </div>
+  </div>
+
+  @if (loading) {
+    <div class="text-center py-5 text-muted">Cargando...</div>
+  } @else {
+    <form [formGroup]="form" (ngSubmit)="save()" class="card">
+      <div class="card-body">
+        <div class="form-check form-switch mb-3">
+          <input type="checkbox" class="form-check-input" id="ldapEnabled" formControlName="enabled" />
+          <label class="form-check-label" for="ldapEnabled">
+            <strong>Habilitar autenticación LDAP</strong>
+          </label>
+        </div>
+
+        <h6 class="text-uppercase small text-muted mt-4 mb-3">Conexión</h6>
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label class="form-label">Host *</label>
+            <input type="text" class="form-control" formControlName="host" placeholder="ldap.empresa.cu" />
+          </div>
+          <div class="col-md-3">
+            <label class="form-label">Puerto *</label>
+            <input type="number" class="form-control" formControlName="port" />
+          </div>
+          <div class="col-md-3 d-flex align-items-center">
+            <div class="form-check mt-3">
+              <input type="checkbox" class="form-check-input" id="ldapSsl" formControlName="useSsl" />
+              <label class="form-check-label" for="ldapSsl">Usar SSL/TLS</label>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">Bind DN</label>
+            <input type="text" class="form-control" formControlName="bindDn"
+                   placeholder="CN=admin,DC=empresa,DC=cu" />
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Bind Password</label>
+            <input type="password" class="form-control" formControlName="bindPassword"
+                   [placeholder]="config?.hasPassword ? '••••••••' : 'Ingrese contraseña'" />
+            <small class="text-muted">Dejar vacío para conservar la contraseña actual.</small>
+          </div>
+        </div>
+
+        <h6 class="text-uppercase small text-muted mt-4 mb-3">Búsqueda</h6>
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label class="form-label">Base DN</label>
+            <input type="text" class="form-control" formControlName="baseDn"
+                   placeholder="DC=empresa,DC=cu" />
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Filtro de búsqueda de usuario</label>
+            <input type="text" class="form-control" formControlName="userSearchFilter" />
+            <small class="text-muted">Usar <code>{{ '{0}' }}</code> para el username.</small>
+          </div>
+        </div>
+
+        <h6 class="text-uppercase small text-muted mt-4 mb-3">Mapeo de atributos</h6>
+        <div class="row g-3">
+          <div class="col-md-3">
+            <label class="form-label">Email</label>
+            <input type="text" class="form-control" formControlName="emailAttribute" />
+          </div>
+          <div class="col-md-3">
+            <label class="form-label">Nombre</label>
+            <input type="text" class="form-control" formControlName="nameAttribute" />
+          </div>
+          <div class="col-md-3">
+            <label class="form-label">Apellidos</label>
+            <input type="text" class="form-control" formControlName="lastNameAttribute" />
+          </div>
+          <div class="col-md-3">
+            <label class="form-label">Rol por defecto</label>
+            <input type="text" class="form-control" formControlName="defaultRole" />
+          </div>
+        </div>
+
+        @if (testResult) {
+          <div class="alert mt-3" [class.alert-success]="testResult.success" [class.alert-danger]="!testResult.success">
+            <strong>{{ testResult.success ? '✓' : '✗' }}</strong> {{ testResult.message }}
+          </div>
+        }
+      </div>
+
+      <div class="card-footer d-flex justify-content-between align-items-center">
+        @if (config) {
+          <small class="text-muted">
+            Última actualización: {{ config.updatedAt | date:'short' }}
+            @if (config.updatedByEmail) { · por <strong>{{ config.updatedByEmail }}</strong> }
+          </small>
+        } @else {
+          <span></span>
+        }
+        <div class="d-flex gap-2">
+          <button type="button" class="btn btn-outline-secondary" (click)="testConnection()" [disabled]="testing">
+            {{ testing ? 'Probando...' : 'Probar conexión' }}
+          </button>
+          <button type="submit" class="btn btn-primary" [disabled]="saving">
+            {{ saving ? 'Guardando...' : 'Guardar cambios' }}
+          </button>
+        </div>
+      </div>
+    </form>
+  }
+</div>

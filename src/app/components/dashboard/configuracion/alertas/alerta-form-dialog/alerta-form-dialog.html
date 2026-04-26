@@ -1,0 +1,70 @@
+<div class="dialog-form">
+  <h2 class="dialog-title mb-3">{{ isEdit ? 'Editar regla' : 'Nueva regla de alerta' }}</h2>
+
+  <form [formGroup]="form" (ngSubmit)="save()" class="d-flex flex-column gap-3">
+    <div>
+      <label class="form-label">Nombre *</label>
+      <input type="text" class="form-control" formControlName="name" />
+    </div>
+
+    <div>
+      <label class="form-label">Descripción</label>
+      <textarea class="form-control" formControlName="description" rows="2"></textarea>
+    </div>
+
+    <div class="row g-2">
+      <div class="col-md-6">
+        <label class="form-label">Tipo de evento *</label>
+        <select class="form-select" formControlName="eventType">
+          @for (t of data.eventTypes; track t.value) {
+            <option [ngValue]="t.value">{{ t.name }}</option>
+          }
+        </select>
+      </div>
+      <div class="col-md-6 d-flex align-items-center">
+        <div class="form-check form-switch mt-3">
+          <input type="checkbox" class="form-check-input" id="ruleEnabled" formControlName="enabled" />
+          <label class="form-check-label" for="ruleEnabled">Habilitada</label>
+        </div>
+      </div>
+    </div>
+
+    @if (requiresThreshold) {
+      <div class="row g-2">
+        <div class="col-md-6">
+          <label class="form-label">Umbral (cantidad)</label>
+          <input type="number" class="form-control" formControlName="threshold" min="1" />
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Ventana (minutos)</label>
+          <input type="number" class="form-control" formControlName="windowMinutes" min="1" />
+        </div>
+      </div>
+    }
+
+    <div>
+      <div class="d-flex justify-content-between align-items-center mb-1">
+        <label class="form-label mb-0">Destinatarios (email)</label>
+        <button type="button" class="btn btn-sm btn-outline-secondary" (click)="addEmail()">+ Agregar</button>
+      </div>
+      <div formArrayName="notifyEmails" class="d-flex flex-column gap-2">
+        @for (ctrl of emails.controls; track $index; let i = $index) {
+          <div class="input-group">
+            <input type="email" class="form-control" [formControlName]="i" placeholder="usuario@empresa.cu" />
+            <button type="button" class="btn btn-outline-danger" (click)="removeEmail(i)">×</button>
+          </div>
+        }
+        @if (emails.length === 0) {
+          <small class="text-muted">No hay destinatarios.</small>
+        }
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-end gap-2 mt-2">
+      <button type="button" class="btn btn-outline-secondary" (click)="cancel()" [disabled]="saving">Cancelar</button>
+      <button type="submit" class="btn btn-primary" [disabled]="saving">
+        {{ saving ? 'Guardando...' : (isEdit ? 'Actualizar' : 'Crear') }}
+      </button>
+    </div>
+  </form>
+</div>

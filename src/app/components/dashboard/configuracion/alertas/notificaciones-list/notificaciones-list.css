@@ -1,0 +1,10 @@
+.notif-container {
+  padding: 0.5rem 0;
+}
+
+.notif-container code {
+  background: #f8f9fa;
+  padding: 0.1rem 0.3rem;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+}

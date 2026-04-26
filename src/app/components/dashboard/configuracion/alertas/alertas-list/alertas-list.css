@@ -1,0 +1,7 @@
+.alertas-container {
+  padding: 0.5rem 0;
+}
+
+.alertas-container .badge {
+  font-size: 0.72rem;
+}

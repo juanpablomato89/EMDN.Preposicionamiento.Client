@@ -1,0 +1,84 @@
+<div class="notif-container">
+  <div class="filters card mb-3">
+    <div class="card-body">
+      <div class="row g-2 align-items-end">
+        <div class="col-md-4">
+          <label class="form-label small mb-1">Regla</label>
+          <select class="form-select" [(ngModel)]="alertRuleId" (ngModelChange)="onFilterChange()">
+            <option [ngValue]="''">Todas</option>
+            @for (r of rules; track r.id) {
+              <option [ngValue]="r.id">{{ r.name }}</option>
+            }
+          </select>
+        </div>
+        <div class="col-md-3">
+          <label class="form-label small mb-1">Estado de envío</label>
+          <select class="form-select" [(ngModel)]="sentFilter" (ngModelChange)="onFilterChange()">
+            <option value="">Todos</option>
+            <option value="true">Enviado</option>
+            <option value="false">Fallido</option>
+          </select>
+        </div>
+        <div class="col-md-2 d-flex">
+          <button class="btn btn-outline-secondary w-100" (click)="load()">Refrescar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-body p-0">
+      <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+          <thead class="table-light">
+            <tr>
+              <th>Disparada</th>
+              <th>Regla</th>
+              <th>Payload</th>
+              <th>Estado</th>
+              <th>Error</th>
+            </tr>
+          </thead>
+          <tbody>
+            @if (isLoading) {
+              <tr><td colspan="5" class="text-center py-4 text-muted">Cargando...</td></tr>
+            } @else if (notifications.length === 0) {
+              <tr><td colspan="5" class="text-center py-4 text-muted">No hay notificaciones</td></tr>
+            } @else {
+              @for (n of notifications; track n.id) {
+                <tr>
+                  <td><small>{{ n.triggeredAt | date:'short' }}</small></td>
+                  <td>{{ n.alertRuleName }}</td>
+                  <td class="text-truncate" style="max-width: 350px;">
+                    <code class="small">{{ n.payload }}</code>
+                  </td>
+                  <td>
+                    @if (n.sent) {
+                      <span class="badge bg-success">Enviada</span>
+                      <div><small class="text-muted">{{ n.sentAt | date:'short' }}</small></div>
+                    } @else {
+                      <span class="badge bg-danger">Fallida</span>
+                    }
+                  </td>
+                  <td><small class="text-danger">{{ n.error || '-' }}</small></td>
+                </tr>
+              }
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card-footer d-flex justify-content-between align-items-center">
+      <small class="text-muted">
+        {{ totalCount }} notificación(es) — Página {{ pageIndex + 1 }} de {{ totalPages }}
+      </small>
+      <div class="d-flex gap-2">
+        <button class="btn btn-sm btn-outline-secondary" [disabled]="pageIndex === 0"
+                (click)="goToPage(pageIndex - 1)">Anterior</button>
+        <button class="btn btn-sm btn-outline-secondary" [disabled]="pageIndex + 1 >= totalPages"
+                (click)="goToPage(pageIndex + 1)">Siguiente</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+.auditoria-container {
+  padding: 0.5rem 0;
+}
+
+.auditoria-container .filters .form-label {
+  color: #6c757d;
+  font-weight: 500;
+}
+
+.auditoria-container .badge {
+  font-size: 0.72rem;
+}

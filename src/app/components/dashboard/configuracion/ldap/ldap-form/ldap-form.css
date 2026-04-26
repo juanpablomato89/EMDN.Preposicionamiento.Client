@@ -1,0 +1,10 @@
+.ldap-container {
+  padding: 0.5rem 0;
+}
+
+.ldap-container code {
+  background: #f1f3f5;
+  padding: 0.1rem 0.3rem;
+  border-radius: 0.25rem;
+  font-size: 0.85em;
+}
