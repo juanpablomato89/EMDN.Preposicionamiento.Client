@@ -1,0 +1,28 @@
+.almacenes-container {
+  padding: 0.5rem 0;
+}
+
+.almacenes-container th[role="button"] {
+  user-select: none;
+  cursor: pointer;
+}
+
+.almacenes-container th[role="button"]:hover {
+  color: #00abb3;
+}
+
+.filters .form-label {
+  color: #6c757d;
+  font-weight: 500;
+}
+
+.btn-link {
+  color: #212529;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.btn-link:hover {
+  color: #00abb3;
+  text-decoration: underline;
+}

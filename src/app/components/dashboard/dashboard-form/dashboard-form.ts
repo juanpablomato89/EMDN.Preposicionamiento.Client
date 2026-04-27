@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { Profile } from '../profile/profile';
 import { Home } from '../home/home';
 import { ProductosList } from '../productos/productos-list/productos-list';
+import { AlmacenesList } from '../almacenes/almacenes-list/almacenes-list';
 import { Configuracion } from '../configuracion/configuracion';
 import { AuthService } from '../../../services/authservice';
 import { ToastrService } from 'ngx-toastr';
@@ -12,7 +13,7 @@ import { BasicUserResponse } from '../../../models/response/basicuserresponse';
 @Component({
   selector: 'app-dashboard-form',
   standalone: true,
-  imports: [CommonModule, Profile, Home, ProductosList, Configuracion],
+  imports: [CommonModule, Profile, Home, ProductosList, AlmacenesList, Configuracion],
   templateUrl: './dashboard-form.html',
   styleUrl: './dashboard-form.scss',
 })
@@ -49,6 +50,11 @@ export class DashboardForm {
         this.title = 'Productos';
         this.subtitle =
           'Datos técnicos, presentaciones y disponibilidad';
+        break;
+      case 'almacenes':
+        this.title = 'Almacenes';
+        this.subtitle =
+          'Gestión de almacenes y asignación de productos por ubicación';
         break;
       case 'configuracion':
         this.title = 'Configuración';

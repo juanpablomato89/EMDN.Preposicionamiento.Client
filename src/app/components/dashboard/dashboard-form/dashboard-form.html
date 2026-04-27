@@ -10,13 +10,17 @@
           <i class="bi bi-house menu-icon" [title]="isCollapsed ? 'Inicio' : ''"></i>
           <span class="menu-text">Inicio</span>
         </div>
-        <div class="menu-item" [class.active]="activeItem === 'prepo' || activeItem === 'productos'" (click)="setActive('prepo')">
+        <div class="menu-item" [class.active]="activeItem === 'prepo' || activeItem === 'productos' || activeItem === 'almacenes'" (click)="setActive('prepo')">
           <i class="bi bi-gem menu-icon" [title]="isCollapsed ? 'Preposicionamiento' : ''"></i>
           <span class="menu-text">Preposicionamiento</span>
         </div>
         <div class="menu-item menu-subitem" [class.active]="activeItem === 'productos'" (click)="setActive('productos')">
           <i class="bi bi-box-seam menu-icon" [title]="isCollapsed ? 'Productos' : ''"></i>
           <span class="menu-text">Productos</span>
+        </div>
+        <div class="menu-item menu-subitem" [class.active]="activeItem === 'almacenes'" (click)="setActive('almacenes')">
+          <i class="bi bi-buildings menu-icon" [title]="isCollapsed ? 'Almacenes' : ''"></i>
+          <span class="menu-text">Almacenes</span>
         </div>
         <div class="menu-item" [class.active]="activeItem === 'configuracion'" (click)="setActive('configuracion')">
           <i class="bi bi-gear menu-icon" [title]="isCollapsed ? 'Configuración' : ''"></i>
@@ -71,6 +75,7 @@
       <div class="col-11" style="margin-top: 1rem">
         @if (activeItem == 'inicio') { <app-home></app-home> }
         @if (activeItem == 'productos') { <app-productos-list></app-productos-list> }
+        @if (activeItem == 'almacenes') { <app-almacenes-list></app-almacenes-list> }
         @if (activeItem == 'configuracion') { <app-configuracion></app-configuracion> }
       </div>
     </div>

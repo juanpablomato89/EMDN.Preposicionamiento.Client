@@ -1,0 +1,63 @@
+<div class="dialog-form">
+  <h2 class="dialog-title mb-3">
+    {{ isEdit ? 'Editar almacén' : 'Nuevo almacén' }}
+  </h2>
+
+  <form [formGroup]="form" (ngSubmit)="save()" class="d-flex flex-column gap-3">
+    <div>
+      <label class="form-label">Nombre del almacén</label>
+      <input
+        type="text"
+        class="form-control"
+        formControlName="nombre"
+        placeholder="Si lo deja vacío, se usará el nombre del municipio"
+      />
+      <small class="text-muted">Opcional. Por defecto se asigna el nombre del municipio.</small>
+    </div>
+
+    <div>
+      <label class="form-label">Provincia *</label>
+      <select
+        class="form-select"
+        formControlName="provinciaId"
+        (change)="onProvinciaChange()"
+      >
+        <option [ngValue]="null">Seleccione...</option>
+        @for (p of data.provincias; track p.id) {
+          <option [ngValue]="p.id">{{ p.descripcion }}</option>
+        }
+      </select>
+      @if (form.get('provinciaId')?.touched && form.get('provinciaId')?.invalid) {
+        <small class="text-danger">Seleccione una provincia.</small>
+      }
+    </div>
+
+    <div>
+      <label class="form-label">Municipio *</label>
+      <select
+        class="form-select"
+        formControlName="municipioId"
+        [disabled]="!form.value.provinciaId || loadingMunicipios"
+      >
+        <option [ngValue]="null">
+          {{ loadingMunicipios ? 'Cargando...' : 'Seleccione...' }}
+        </option>
+        @for (m of municipios; track m.id) {
+          <option [ngValue]="m.id">{{ m.descripcion }}</option>
+        }
+      </select>
+      @if (form.get('municipioId')?.touched && form.get('municipioId')?.invalid) {
+        <small class="text-danger">Seleccione un municipio.</small>
+      }
+    </div>
+
+    <div class="d-flex justify-content-end gap-2 mt-2">
+      <button type="button" class="btn btn-outline-secondary" (click)="cancel()" [disabled]="saving">
+        Cancelar
+      </button>
+      <button type="submit" class="btn btn-primary" [disabled]="saving">
+        {{ saving ? 'Guardando...' : (isEdit ? 'Actualizar' : 'Crear') }}
+      </button>
+    </div>
+  </form>
+</div>
