@@ -31,19 +31,18 @@
 }
 
 .profile__text {
-  width: 126;
-  height: 24;
+  width: 126px;
+  height: 24px;
   margin-left: 8px;
 }
 
 .profile__text span {
   display: block;
-  font-family: "Poppins", sans-serif;
+  font-family: "Poppins", system-ui, sans-serif;
   font-weight: 400;
-  font-style: Regular;
   font-size: 16px;
   line-height: 150%;
-  letter-spacing: 0%;
+  letter-spacing: 0;
 }
 
 @media screen and (max-width: 1154px) {

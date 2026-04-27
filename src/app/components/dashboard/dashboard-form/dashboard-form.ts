@@ -43,7 +43,7 @@ export class DashboardForm {
       case 'inicio':
         this.title = `Bienvenido, ${this.user.name}`;
         this.subtitle =
-          'Descubra Información acerca del preposicionamiento';
+          'Mapa de productos preposicionados en la red nacional.';
         break;
         case 'productos':
         this.title = 'Productos';

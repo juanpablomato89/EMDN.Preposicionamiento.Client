@@ -205,14 +205,12 @@
 }
 
 .welcome__subtitle {
-  width: 506;
-  height: 24;
-  font-family: "Poppins", sans-serif;
+  display: block;
+  font-family: "Roboto", system-ui, sans-serif;
   font-weight: 400;
-  font-style: Regular;
   font-size: 16px;
   line-height: 150%;
-  letter-spacing: 0%;
+  letter-spacing: 0;
   color: #797d85;
 }
 

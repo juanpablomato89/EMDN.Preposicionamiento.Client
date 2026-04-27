@@ -1,5 +1,66 @@
-div {
-  display: block;
-  height: 100vh;
-  width: inherit !important;
+.map-host {
+  height: 520px;
+  width: 100%;
+  min-height: 380px;
 }
+
+/* Leaflet popup — match design system */
+:host ::ng-deep .leaflet-popup-content-wrapper {
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+  border: 1px solid #e9ecef;
+}
+:host ::ng-deep .leaflet-popup-content {
+  margin: 12px 14px;
+  font-family: "Roboto", system-ui, sans-serif;
+  min-width: 200px;
+  font-size: 13px;
+  color: #495057;
+}
+
+/* Custom pin markers */
+:host ::ng-deep .pin-wrap {
+  background: transparent !important;
+  border: none !important;
+}
+:host ::ng-deep .pin {
+  width: 30px;
+  height: 30px;
+  border-radius: 50% 50% 50% 0;
+  background: #00abb3;
+  transform: rotate(-45deg);
+  box-shadow: 0 4px 10px rgba(0, 171, 179, 0.45);
+  border: 3px solid #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+:host ::ng-deep .pin.warn {
+  background: #ffc107;
+  box-shadow: 0 4px 10px rgba(255, 193, 7, 0.45);
+}
+:host ::ng-deep .pin.err {
+  background: #ff3b30;
+  box-shadow: 0 4px 10px rgba(255, 59, 48, 0.45);
+}
+:host ::ng-deep .pin span {
+  transform: rotate(45deg);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  font-family: "Space Grotesk", ui-monospace, monospace;
+  line-height: 1;
+}
+
+/* Status pills inside popup */
+:host ::ng-deep .pill {
+  display: inline-block;
+  padding: 1px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+:host ::ng-deep .pill-ok  { background: rgba(0,171,179,.10); color: #00abb3; }
+:host ::ng-deep .pill-warn { background: rgba(255,193,7,.18); color: #856404; }
+:host ::ng-deep .pill-err  { background: rgba(255,59,48,.10); color: #ff3b30; }

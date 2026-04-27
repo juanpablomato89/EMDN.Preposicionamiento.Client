@@ -5,10 +5,10 @@
 
   <form [formGroup]="form" (ngSubmit)="save()" class="d-flex flex-column gap-3">
     <div>
-      <label class="form-label">Email *</label>
+      <label class="form-label">Correo *</label>
       <input type="email" class="form-control" formControlName="email" />
       @if (form.get('email')?.touched && form.get('email')?.invalid) {
-        <small class="text-danger">Email requerido y válido.</small>
+        <small class="text-danger">El correo es obligatorio y debe ser válido.</small>
       }
     </div>
 

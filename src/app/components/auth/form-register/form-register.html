@@ -1,139 +1,116 @@
-<!-- register.component.html -->
 <div class="register-container">
   <div class="row justify-content-center align-items-center">
-    <div class="login-logo justify-content-center mb-5 mb-md-0"></div>
     <div class="mb-5 mb-md-0">
       <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="form-register">
-        <!-- Título y subtítulo -->
-        <div class="text-content text-center mb-2">
-          <span class="display-5 fw-bold color__text title__text">Bienvenido</span>
-          <p class="lead color__text subtitle__text">Por favor ingresa tus datos</p>
+
+        <!-- Título -->
+        <div class="text-content text-center">
+          <span class="title__text">Bienvenido</span>
+          <span class="subtitle__text">Por favor ingresa tus datos</span>
         </div>
 
-        <!-- Fila: Nombre y Apellido -->
+        <!-- Nombre y Apellidos -->
         <div class="row g-3 mb-2">
           <div class="col-md-6">
-            <label class="form-label color__text">Nombre</label>
+            <label class="form-label">Nombre</label>
             <input
               type="text"
               class="form-control"
               formControlName="name"
-              [ngClass]="{
-                'is-invalid':
-                  registerForm.get('name')?.touched && registerForm.get('name')?.invalid,
-              }"
+              placeholder="Nombre"
+              [ngClass]="{ 'is-invalid': registerForm.get('name')?.touched && registerForm.get('name')?.invalid }"
             />
-            <div
-              *ngIf="registerForm.get('name')?.invalid && registerForm.get('name')?.touched"
-              class="invalid-feedback"
-            >
-              Ingrese un nombre válido (mínimo 2 caracteres)
+            <div *ngIf="registerForm.get('name')?.invalid && registerForm.get('name')?.touched" class="invalid-feedback">
+              Ingresa un nombre válido (mínimo 2 caracteres)
             </div>
           </div>
           <div class="col-md-6">
-            <label class="form-label color__text">Apellidos</label>
+            <label class="form-label">Apellidos</label>
             <input
               type="text"
               class="form-control"
               formControlName="lastName"
-              [ngClass]="{
-                'is-invalid':
-                  registerForm.get('lastName')?.touched && registerForm.get('lastName')?.invalid,
-              }"
+              placeholder="Apellidos"
+              [ngClass]="{ 'is-invalid': registerForm.get('lastName')?.touched && registerForm.get('lastName')?.invalid }"
             />
-            <div
-              *ngIf="registerForm.get('lastName')?.invalid && registerForm.get('lastName')?.touched"
-              class="invalid-feedback"
-            >
-              Por favor, introduzca un apellido válido (mínimo 2 caracteres)
+            <div *ngIf="registerForm.get('lastName')?.invalid && registerForm.get('lastName')?.touched" class="invalid-feedback">
+              Por favor, introduce un apellido válido (mínimo 2 caracteres)
             </div>
           </div>
         </div>
 
-        <div class="row g-3 mb-2">
-          <div class="col-md-12">
-            <label class="form-label color__text">Correo</label>
+        <!-- Correo -->
+        <div class="mb-2">
+          <label class="form-label">Correo</label>
+          <div class="input-group">
             <input
               type="email"
               class="form-control"
               formControlName="email"
-              [ngClass]="{
-                'is-invalid':
-                  registerForm.get('email')?.touched && registerForm.get('email')?.invalid,
-              }"
+              placeholder="usuario@dcn.co.cu"
+              [ngClass]="{ 'is-invalid': registerForm.get('email')?.touched && registerForm.get('email')?.invalid }"
             />
-            <div
-              *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched"
-              class="invalid-feedback"
-            >
-              Por favor, introduce una dirección de correo electrónico válida
-            </div>
+            <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+          </div>
+          <div *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched" class="invalid-feedback d-block">
+            Por favor, introduce una dirección de correo electrónico válida
           </div>
         </div>
 
-        <div class="row g-3 mb-2">
+        <!-- Contraseña y Confirmar -->
+        <div class="row g-3 mb-3">
           <div class="col-md-6">
-            <label class="form-label color__text">Contraseña</label>
-            <input
-              type="password"
-              class="form-control"
-              formControlName="password"
-              [ngClass]="{
-                'is-invalid':
-                  registerForm.get('password')?.touched && registerForm.get('password')?.invalid,
-              }"
-            />
-            <div
-              *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched"
-              class="invalid-feedback"
-            >
+            <label class="form-label">Contraseña</label>
+            <div class="input-group">
+              <input
+                type="password"
+                class="form-control"
+                formControlName="password"
+                placeholder="••••••••"
+                [ngClass]="{ 'is-invalid': registerForm.get('password')?.touched && registerForm.get('password')?.invalid }"
+              />
+              <span class="input-group-text"><i class="bi bi-eye-slash"></i></span>
+            </div>
+            <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched" class="invalid-feedback d-block">
               La contraseña debe tener al menos 8 caracteres
             </div>
           </div>
-
           <div class="col-md-6">
-            <label class="form-label color__text">Confirmar Contraseña</label>
-            <input
-              type="password"
-              class="form-control"
-              formControlName="confirmPassword"
-              [ngClass]="{
-                'is-invalid':
-                  registerForm.get('confirmPassword')?.touched &&
-                  (registerForm.get('confirmPassword')?.invalid ||
-                    registerForm.errors?.['passwordMismatch']),
-              }"
-            />
-
-            <div
-              *ngIf="
-                registerForm.errors?.['passwordMismatch'] &&
-                registerForm.get('confirmPassword')?.touched
-              "
-              class="invalid-feedback"
-            >
+            <label class="form-label">Confirmar contraseña</label>
+            <div class="input-group">
+              <input
+                type="password"
+                class="form-control"
+                formControlName="confirmPassword"
+                placeholder="••••••••"
+                [ngClass]="{
+                  'is-invalid': registerForm.get('confirmPassword')?.touched &&
+                    (registerForm.get('confirmPassword')?.invalid || registerForm.errors?.['passwordMismatch'])
+                }"
+              />
+              <span class="input-group-text"><i class="bi bi-eye-slash"></i></span>
+            </div>
+            <div *ngIf="registerForm.errors?.['passwordMismatch'] && registerForm.get('confirmPassword')?.touched" class="invalid-feedback d-block">
               Las contraseñas no coinciden
             </div>
           </div>
         </div>
 
+        <!-- Botón -->
         <div class="d-grid">
           <button
-            mat-raised-button
-            color="primary"
             class="btn btn-lg btn-submit"
             type="submit"
-            [disabled]="
-              isLoading || registerForm.invalid || registerForm.errors?.['passwordMismatch']
-            "
+            [disabled]="isLoading || registerForm.invalid || registerForm.errors?.['passwordMismatch']"
           >
             @if (isLoading) {
-              <span>Registrando...</span>
+              <span>registrando...</span>
             } @else {
               <span>Registrar</span>
             }
           </button>
         </div>
+
       </form>
     </div>
   </div>

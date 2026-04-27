@@ -85,10 +85,10 @@
             class="invalid-feedback"
           >
             <div *ngIf="loginForm.get('password')?.errors?.['required']">
-              Password is required
+              La contraseña es obligatoria
             </div>
             <div *ngIf="loginForm.get('password')?.errors?.['minlength']">
-              Password must be at least 6 characters
+              La contraseña debe tener al menos 6 caracteres
             </div>
           </div>
         </div>
@@ -107,7 +107,7 @@
           </div>
 
           <div class="forgot-link">
-            <a href="/forgot-password">Cambiar Contraseña?</a>
+            <a href="/forgot-password">¿Cambiar contraseña?</a>
           </div>
         </div>
 
@@ -130,7 +130,7 @@
 
         <!-- Register Link -->
         <div class="register-link">
-          <u>No tengo una cuenta?</u> <a href="/register">Regístrate aquí </a>
+          <u>¿No tengo una cuenta?</u> <a href="/register">Regístrate aquí</a>
         </div>
       </form>
     </div>
