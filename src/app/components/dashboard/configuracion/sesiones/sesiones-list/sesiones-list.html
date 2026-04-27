@@ -34,7 +34,9 @@
         </div>
 
         <div class="col-md-4 d-flex justify-content-end">
-          <button class="btn btn-outline-secondary" (click)="load()">Refrescar</button>
+          <button class="btn btn-outline-secondary" (click)="load()" title="Refrescar">
+            <i class="bi bi-arrow-clockwise"></i>
+          </button>
         </div>
       </div>
     </div>
@@ -79,14 +81,15 @@
                   <td class="text-end">
                     <button class="btn btn-sm btn-outline-danger me-1"
                             [disabled]="!s.isActive"
-                            (click)="revoke(s)">
-                      Revocar
+                            (click)="revoke(s)"
+                            title="Revocar sesión">
+                      <i class="bi bi-slash-circle"></i>
                     </button>
                     <button class="btn btn-sm btn-outline-warning"
                             [disabled]="!s.isActive"
                             (click)="revokeAllForUser(s)"
-                            title="Revocar todas las sesiones activas de este usuario">
-                      Revocar todas
+                            title="Revocar todas las sesiones de este usuario">
+                      <i class="bi bi-person-slash"></i>
                     </button>
                   </td>
                 </tr>
@@ -104,10 +107,16 @@
       <div class="d-flex gap-2">
         <button class="btn btn-sm btn-outline-secondary"
                 [disabled]="pageIndex === 0"
-                (click)="goToPage(pageIndex - 1)">Anterior</button>
+                (click)="goToPage(pageIndex - 1)"
+                title="Anterior">
+          <i class="bi bi-chevron-left"></i>
+        </button>
         <button class="btn btn-sm btn-outline-secondary"
                 [disabled]="pageIndex + 1 >= totalPages"
-                (click)="goToPage(pageIndex + 1)">Siguiente</button>
+                (click)="goToPage(pageIndex + 1)"
+                title="Siguiente">
+          <i class="bi bi-chevron-right"></i>
+        </button>
       </div>
     </div>
   </div>

@@ -22,6 +22,7 @@ interface MenuItem {
   key: SecuritySection;
   label: string;
   description: string;
+  icon: string;
 }
 
 @Component({
@@ -45,13 +46,13 @@ export class Configuracion implements OnInit {
   isAdmin = false;
 
   readonly menu: MenuItem[] = [
-    { key: 'usuarios', label: 'Usuarios', description: 'Gestión de cuentas' },
-    { key: 'roles', label: 'Roles', description: 'Definición de roles' },
-    { key: 'sesiones', label: 'Sesiones activas', description: 'Tokens emitidos' },
-    { key: 'password-policy', label: 'Políticas de contraseña', description: 'Reglas de complejidad' },
-    { key: 'auditoria', label: 'Auditoría', description: 'Logs de eventos' },
-    { key: 'ldap', label: 'LDAP / AD', description: 'Integración de dominio' },
-    { key: 'alertas', label: 'Alertas', description: 'Reglas y notificaciones' },
+    { key: 'usuarios',        label: 'Usuarios',                description: 'Gestión de cuentas',     icon: 'bi-people' },
+    { key: 'roles',           label: 'Roles',                   description: 'Definición de roles',     icon: 'bi-shield' },
+    { key: 'sesiones',        label: 'Sesiones activas',        description: 'Tokens emitidos',         icon: 'bi-laptop' },
+    { key: 'password-policy', label: 'Políticas de contraseña', description: 'Reglas de complejidad',   icon: 'bi-key' },
+    { key: 'auditoria',       label: 'Auditoría',               description: 'Logs de eventos',         icon: 'bi-journal-text' },
+    { key: 'ldap',            label: 'LDAP / AD',               description: 'Integración de dominio',  icon: 'bi-server' },
+    { key: 'alertas',         label: 'Alertas',                 description: 'Reglas y notificaciones', icon: 'bi-bell' },
   ];
 
   constructor(private authService: AuthService) {}

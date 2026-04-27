@@ -36,11 +36,30 @@
   color: #495057;
   transition: all 0.3s ease;
   overflow: hidden;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-right: 1px solid #e9ecef;
   position: relative;
 
   &.collapsed {
     width: 90px;
+
+    .menu-item {
+      justify-content: center;
+      padding-left: 0;
+      padding-right: 0;
+
+      &.active {
+        padding-left: 0;
+        padding-right: 0;
+      }
+    }
+
+    .menu-subitem {
+      padding-left: 0;
+    }
+
+    .menu-text {
+      display: none;
+    }
   }
 }
 
@@ -69,65 +88,59 @@
 .menu-item {
   display: flex;
   align-items: center;
-  padding: 12px 12px;
+  gap: 10px;
+  padding: 11px 18px;
   cursor: pointer;
-  transition: background-color 0.3s;
-  border-left: 4px solid transparent;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  border-left: 3px solid transparent;
+  font-size: 14px;
+  font-weight: 500;
+  color: #495057;
 
   &:hover {
     background-color: #f8f9fa;
+    color: #212529;
   }
 
   &.active {
     background-color: #e9ecef;
-    border-left: 4px solid #00abb3;
-    padding-left: 16px;
+    border-left-color: #00abb3;
+    padding-left: 19px;
+    font-weight: 600;
+    color: #00abb3;
 
-    .menu-icon {
-      color: #00abb3;
-    }
+    .menu-icon { color: #00abb3; }
+  }
 
-    .menu-text {
-      color: #00abb3;
-    }
+  &.danger {
+    color: #FF3B30;
+    .menu-icon { color: #FF3B30; }
+    &:hover { background-color: #fff5f5; }
   }
 }
 
-.accordion-button{
-  &:hover {
-    background-color: #f8f9fa;
-  }
+.menu-subitem {
+  padding-left: 38px;
+  font-size: 13.5px;
+  color: #6c757d;
 
   &.active {
+    padding-left: 40px;
     color: #00abb3;
-    background-color: #e9ecef;
-    border-left: 4px solid #00abb3;
-    padding-left: 16px;
-
-    .menu-icon {
-      color: #00abb3;
-    }
-
-    .menu-text {
-      color: #00abb3;
-    }
   }
 }
 
 .menu-icon {
-  font-size: 1.2rem;
-  min-width: 30px;
-  display: flex;
-  justify-content: center;
-  color: #00abb3;
+  font-size: 1.1rem;
+  min-width: 18px;
+  text-align: center;
+  color: inherit;
+  flex-shrink: 0;
 }
 
 .menu-text {
-  margin-left: 2px;
   white-space: nowrap;
   overflow: hidden;
-  transition: opacity 0.3s, margin 0.3s;
-  font-weight: 500;
 }
 
 .toggle-btn {
@@ -214,7 +227,4 @@
   color: #797d85;
 }
 
-.sub-item-favorites{
-  margin-left: 20px;
-}
 

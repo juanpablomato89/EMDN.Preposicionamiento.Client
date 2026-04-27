@@ -6,7 +6,6 @@
   } @else {
     <div class="security-layout">
       <aside class="security-sidemenu">
-        <div class="security-sidemenu-title">Seguridad</div>
         <ul class="security-sidemenu-list">
           @for (item of menu; track item.key) {
             <li>
@@ -15,9 +14,9 @@
                 class="security-sidemenu-item"
                 [class.active]="active === item.key"
                 (click)="setSection(item.key)"
+                [title]="item.label"
               >
-                <span class="item-label">{{ item.label }}</span>
-                <span class="item-description">{{ item.description }}</span>
+                <i class="bi {{ item.icon }}"></i>
               </button>
             </li>
           }

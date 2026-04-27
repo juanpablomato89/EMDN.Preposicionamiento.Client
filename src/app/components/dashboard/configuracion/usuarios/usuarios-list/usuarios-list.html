@@ -47,8 +47,12 @@
         </div>
 
         <div class="col-md-2 d-flex gap-2">
-          <button class="btn btn-outline-secondary flex-grow-1" (click)="clearFilters()">Limpiar</button>
-          <button class="btn btn-primary flex-grow-1" (click)="openCreate()">+ Nuevo</button>
+          <button class="btn btn-outline-secondary flex-grow-1" (click)="clearFilters()" title="Limpiar filtros">
+            <i class="bi bi-eraser"></i>
+          </button>
+          <button class="btn btn-primary flex-grow-1" (click)="openCreate()" title="Nuevo usuario">
+            <i class="bi bi-plus-lg"></i>
+          </button>
         </div>
       </div>
     </div>
@@ -96,19 +100,24 @@
                   </td>
                   <td class="text-end">
                     <button class="btn btn-sm btn-outline-primary me-1" (click)="openEdit(u)" title="Editar">
-                      Editar
+                      <i class="bi bi-pencil"></i>
                     </button>
                     <button class="btn btn-sm btn-outline-warning me-1" (click)="openResetPassword(u)" title="Resetear contraseña">
-                      Pass
+                      <i class="bi bi-key"></i>
                     </button>
                     <button class="btn btn-sm me-1"
                             [class.btn-outline-success]="u.isLockedOut"
                             [class.btn-outline-secondary]="!u.isLockedOut"
-                            (click)="toggleLock(u)">
-                      {{ u.isLockedOut ? 'Desbloquear' : 'Bloquear' }}
+                            (click)="toggleLock(u)"
+                            [title]="u.isLockedOut ? 'Desbloquear' : 'Bloquear'">
+                      @if (u.isLockedOut) {
+                        <i class="bi bi-unlock"></i>
+                      } @else {
+                        <i class="bi bi-lock"></i>
+                      }
                     </button>
-                    <button class="btn btn-sm btn-outline-danger" (click)="openDelete(u)">
-                      Eliminar
+                    <button class="btn btn-sm btn-outline-danger" (click)="openDelete(u)" title="Eliminar">
+                      <i class="bi bi-trash"></i>
                     </button>
                   </td>
                 </tr>
@@ -126,10 +135,16 @@
       <div class="d-flex gap-2">
         <button class="btn btn-sm btn-outline-secondary"
                 [disabled]="pageIndex === 0"
-                (click)="goToPage(pageIndex - 1)">Anterior</button>
+                (click)="goToPage(pageIndex - 1)"
+                title="Anterior">
+          <i class="bi bi-chevron-left"></i>
+        </button>
         <button class="btn btn-sm btn-outline-secondary"
                 [disabled]="pageIndex + 1 >= totalPages"
-                (click)="goToPage(pageIndex + 1)">Siguiente</button>
+                (click)="goToPage(pageIndex + 1)"
+                title="Siguiente">
+          <i class="bi bi-chevron-right"></i>
+        </button>
       </div>
     </div>
   </div>

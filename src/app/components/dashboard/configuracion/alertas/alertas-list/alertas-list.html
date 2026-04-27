@@ -6,15 +6,21 @@
     </div>
     <div class="btn-group">
       <button class="btn btn-sm" [class.btn-primary]="view === 'rules'" [class.btn-outline-primary]="view !== 'rules'"
-              (click)="view = 'rules'">Reglas</button>
+              (click)="view = 'rules'" title="Reglas">
+        <i class="bi bi-list-check"></i>
+      </button>
       <button class="btn btn-sm" [class.btn-primary]="view === 'history'" [class.btn-outline-primary]="view !== 'history'"
-              (click)="view = 'history'">Historial</button>
+              (click)="view = 'history'" title="Historial">
+        <i class="bi bi-clock-history"></i>
+      </button>
     </div>
   </div>
 
   @if (view === 'rules') {
     <div class="d-flex justify-content-end mb-3">
-      <button class="btn btn-primary" (click)="openCreate()">+ Nueva regla</button>
+      <button class="btn btn-primary" (click)="openCreate()" title="Nueva regla">
+        <i class="bi bi-plus-lg"></i>
+      </button>
     </div>
 
     <div class="card">
@@ -59,9 +65,15 @@
                       }
                     </td>
                     <td class="text-end">
-                      <button class="btn btn-sm btn-outline-primary me-1" (click)="openEdit(r)">Editar</button>
-                      <button class="btn btn-sm btn-outline-secondary me-1" (click)="test(r)">Probar</button>
-                      <button class="btn btn-sm btn-outline-danger" (click)="delete(r)">Eliminar</button>
+                      <button class="btn btn-sm btn-outline-primary me-1" (click)="openEdit(r)" title="Editar">
+                        <i class="bi bi-pencil"></i>
+                      </button>
+                      <button class="btn btn-sm btn-outline-secondary me-1" (click)="test(r)" title="Probar">
+                        <i class="bi bi-play-fill"></i>
+                      </button>
+                      <button class="btn btn-sm btn-outline-danger" (click)="delete(r)" title="Eliminar">
+                        <i class="bi bi-trash"></i>
+                      </button>
                     </td>
                   </tr>
                 }

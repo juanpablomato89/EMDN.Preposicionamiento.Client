@@ -4,7 +4,9 @@
       <h5 class="mb-0">Roles del sistema</h5>
       <small class="text-muted">Administra los roles disponibles y sus permisos.</small>
     </div>
-    <button class="btn btn-primary" (click)="openCreate()">+ Nuevo rol</button>
+    <button class="btn btn-primary" (click)="openCreate()" title="Nuevo rol">
+      <i class="bi bi-plus-lg"></i>
+    </button>
   </div>
 
   <div class="card">
@@ -41,13 +43,13 @@
                             [disabled]="r.isSystem"
                             (click)="openEdit(r)"
                             [title]="r.isSystem ? 'Rol del sistema' : 'Editar'">
-                      Editar
+                      <i class="bi bi-pencil"></i>
                     </button>
                     <button class="btn btn-sm btn-outline-danger"
                             [disabled]="r.isSystem || r.usersCount > 0"
                             (click)="openDelete(r)"
                             [title]="r.isSystem ? 'Rol del sistema' : (r.usersCount > 0 ? 'Tiene usuarios asignados' : 'Eliminar')">
-                      Eliminar
+                      <i class="bi bi-trash"></i>
                     </button>
                   </td>
                 </tr>

@@ -40,7 +40,9 @@
           <input type="datetime-local" class="form-control" [(ngModel)]="to" (ngModelChange)="onFilterChange()" />
         </div>
         <div class="col-md-1 d-flex">
-          <button class="btn btn-outline-secondary w-100" (click)="clearFilters()">Limpiar</button>
+          <button class="btn btn-outline-secondary w-100" (click)="clearFilters()" title="Limpiar filtros">
+            <i class="bi bi-eraser"></i>
+          </button>
         </div>
       </div>
     </div>
@@ -80,7 +82,9 @@
                     }
                   </td>
                   <td class="text-end">
-                    <button class="btn btn-sm btn-outline-primary" (click)="openDetail(l)">Ver</button>
+                    <button class="btn btn-sm btn-outline-primary" (click)="openDetail(l)" title="Ver detalle">
+                      <i class="bi bi-eye"></i>
+                    </button>
                   </td>
                 </tr>
               }
@@ -96,9 +100,13 @@
       </small>
       <div class="d-flex gap-2">
         <button class="btn btn-sm btn-outline-secondary" [disabled]="pageIndex === 0"
-                (click)="goToPage(pageIndex - 1)">Anterior</button>
+                (click)="goToPage(pageIndex - 1)" title="Anterior">
+          <i class="bi bi-chevron-left"></i>
+        </button>
         <button class="btn btn-sm btn-outline-secondary" [disabled]="pageIndex + 1 >= totalPages"
-                (click)="goToPage(pageIndex + 1)">Siguiente</button>
+                (click)="goToPage(pageIndex + 1)" title="Siguiente">
+          <i class="bi bi-chevron-right"></i>
+        </button>
       </div>
     </div>
   </div>

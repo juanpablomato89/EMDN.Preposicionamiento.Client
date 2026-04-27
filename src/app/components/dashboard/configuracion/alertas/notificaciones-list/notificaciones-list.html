@@ -20,7 +20,9 @@
           </select>
         </div>
         <div class="col-md-2 d-flex">
-          <button class="btn btn-outline-secondary w-100" (click)="load()">Refrescar</button>
+          <button class="btn btn-outline-secondary w-100" (click)="load()" title="Refrescar">
+            <i class="bi bi-arrow-clockwise"></i>
+          </button>
         </div>
       </div>
     </div>
@@ -75,9 +77,13 @@
       </small>
       <div class="d-flex gap-2">
         <button class="btn btn-sm btn-outline-secondary" [disabled]="pageIndex === 0"
-                (click)="goToPage(pageIndex - 1)">Anterior</button>
+                (click)="goToPage(pageIndex - 1)" title="Anterior">
+          <i class="bi bi-chevron-left"></i>
+        </button>
         <button class="btn btn-sm btn-outline-secondary" [disabled]="pageIndex + 1 >= totalPages"
-                (click)="goToPage(pageIndex + 1)">Siguiente</button>
+                (click)="goToPage(pageIndex + 1)" title="Siguiente">
+          <i class="bi bi-chevron-right"></i>
+        </button>
       </div>
     </div>
   </div>

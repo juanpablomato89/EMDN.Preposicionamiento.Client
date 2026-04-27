@@ -18,12 +18,12 @@
   width: 100%;
   max-width: 620px;
   padding: 2.25rem 2rem;
-  background: rgba(255, 255, 255, 0.16);
-  border: 1.5px solid rgba(255, 255, 255, 0.24);
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  border-radius: 8px;
+  background: rgba(15, 23, 42, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(22px) saturate(160%);
+  -webkit-backdrop-filter: blur(22px) saturate(160%);
+  border-radius: 22px;
   margin: 0 auto;
 }
 
@@ -37,7 +37,11 @@
   font-size: 2rem;
   line-height: 120%;
   letter-spacing: -0.02em;
-  color: #f3f3f3;
+  background: linear-gradient(135deg, #ffffff 0%, #99f6e4 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
 }
 
 .subtitle__text {
@@ -122,17 +126,24 @@
 /* ── Submit button ───────────────────────────────────── */
 .btn-submit {
   width: 100%;
-  background: #00c1ca !important;
+  height: 44px;
+  background: linear-gradient(135deg, #14b8a6 0%, #0ea5e9 100%) !important;
   border: none;
-  border-radius: 8px !important;
+  border-radius: 12px !important;
   color: #fff !important;
   font-family: "Roboto", system-ui, sans-serif;
-  font-size: 0.95rem;
-  font-weight: 500;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
   padding: 0.7rem 1rem;
-  transition: background 220ms ease;
+  box-shadow: 0 8px 20px rgba(20, 184, 166, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  transition: transform 180ms ease, box-shadow 180ms ease, filter 180ms ease;
 
-  &:hover:not(:disabled) { background: #00a4ac !important; }
+  &:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 28px rgba(14, 165, 233, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    filter: brightness(1.05);
+  }
   &:disabled { opacity: 0.55; cursor: not-allowed; }
 }
 
