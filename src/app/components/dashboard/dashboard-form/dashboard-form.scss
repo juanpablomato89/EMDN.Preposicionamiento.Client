@@ -29,10 +29,10 @@
 }
 
 .sidebar {
-  width: 300px;
+  width: 260px;
   min-width: 60px;
   min-height: 100vh;
-  background-color: white;
+  background-color: #ffffff;
   color: #495057;
   transition: all 0.3s ease;
   overflow: hidden;
@@ -40,16 +40,22 @@
   position: relative;
 
   &.collapsed {
-    width: 90px;
+    width: 76px;
+
+    .menu {
+      padding: 0.5rem 0.5rem;
+    }
 
     .menu-item {
       justify-content: center;
-      padding-left: 0;
-      padding-right: 0;
+      padding: 10px 0;
+      width: 44px;
+      height: 44px;
+      margin: 2px auto;
+      border-radius: 12px;
 
       &.active {
-        padding-left: 0;
-        padding-right: 0;
+        padding: 10px 0;
       }
     }
 
@@ -57,24 +63,57 @@
       padding-left: 0;
     }
 
-    .menu-text {
+    .menu-text,
+    .menu-chevron,
+    .menu-section-title {
       display: none;
     }
   }
 }
 
+.sidebar-body {
+  padding: 0.25rem 0;
+}
+
+.menu {
+  padding: 0.5rem 0.75rem;
+}
+
+.menu-section-title {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #adb5bd;
+  padding: 12px 14px 8px;
+}
+
 .logo {
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
+  align-items: center;
+  height: 70px;
+  padding: 0 1rem;
   position: relative;
 
   .logo-icon {
     background-image: url(../../../../assets/img/logo-dashboard.png);
     background-size: contain;
     background-repeat: no-repeat;
-    width: 65px;
-    height: 65px;
+    background-position: center;
+    width: 56px;
+    height: 56px;
     transition: all 0.3s ease;
+  }
+}
+
+.sidebar.collapsed .logo {
+  padding: 0;
+  justify-content: center;
+
+  .logo-icon {
+    width: 40px;
+    height: 40px;
   }
 }
 
@@ -88,28 +127,37 @@
 .menu-item {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 11px 18px;
+  gap: 12px;
+  padding: 10px 14px;
+  margin: 2px 0;
   cursor: pointer;
-  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
-  border-left: 3px solid transparent;
+  transition: background 0.15s ease, color 0.15s ease;
+  border-radius: 10px;
   font-size: 14px;
   font-weight: 500;
   color: #495057;
+  position: relative;
 
   &:hover {
-    background-color: #f8f9fa;
+    background-color: #f1f3f5;
     color: #212529;
   }
 
   &.active {
-    background-color: #e9ecef;
-    border-left-color: #00abb3;
-    padding-left: 19px;
-    font-weight: 600;
+    background-color: rgba(0, 171, 179, 0.10);
     color: #00abb3;
+    font-weight: 600;
 
     .menu-icon { color: #00abb3; }
+  }
+
+  &.menu-parent {
+    .menu-chevron {
+      margin-left: auto;
+      font-size: 0.8rem;
+      color: #adb5bd;
+      transition: transform 0.2s ease;
+    }
   }
 
   &.danger {
@@ -121,12 +169,14 @@
 
 .menu-subitem {
   padding-left: 38px;
-  font-size: 13.5px;
+  font-size: 13px;
   color: #6c757d;
+  font-weight: 500;
 
   &.active {
-    padding-left: 40px;
+    background-color: rgba(0, 171, 179, 0.10);
     color: #00abb3;
+    font-weight: 600;
   }
 }
 
@@ -144,31 +194,42 @@
 }
 
 .toggle-btn {
-  position: relative;
-  top: 80px;
-  left: -25px;
+  position: absolute;
+  top: 22px;
+  left: calc(260px - 14px);
   z-index: 20;
   cursor: pointer;
   color: #00abb3;
   font-size: 24px;
-  border-radius: 12px;
-  width: 32px;
-  height: 32px;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  padding: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   border: 1px solid #e9ecef;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
   background-color: white;
-  transition: left 0.3s ease, background-color 0.3s;
+  transition: left 0.3s ease, background-color 0.2s ease, transform 0.2s ease;
+
+  p { line-height: 1; }
+  svg { width: 16px; height: 16px; }
 
   &:hover {
     background-color: #f8f9fa;
+    transform: scale(1.05);
   }
 
   &:focus {
     outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 171, 179, 0.20);
   }
+}
+
+/* When sidebar is collapsed, follow it */
+.sidebar.collapsed ~ .toggle-btn {
+  left: calc(76px - 14px);
 }
 
 .sidebar-container.collapsed {

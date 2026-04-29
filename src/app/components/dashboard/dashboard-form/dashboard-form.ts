@@ -20,6 +20,11 @@ import { BasicUserResponse } from '../../../models/response/basicuserresponse';
 export class DashboardForm {
   isCollapsed = false;
   activeItem = 'inicio';
+  expanded: Record<string, boolean> = { prepo: true };
+
+  toggleExpand(key: string): void {
+    this.expanded[key] = !this.expanded[key];
+  }
   user: BasicUserResponse = {};
   title = '';
   subtitle = '';
